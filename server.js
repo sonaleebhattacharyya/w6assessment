@@ -1,9 +1,17 @@
 const express = require('express')
 const app = express()
+const path = require('path')
+const cors = require('cors')
+const {ROLLBAR_TOKEN} = process.env
 const {bots, playerRecord} = require('./data')
 const {shuffleArray} = require('./utils')
-
 app.use(express.json())
+app.use(cors())
+
+// I think this is the middleware and/or endpoints that will serve the files from the public folder. 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '/index.html')) 
+})
 
 app.get('/api/robots', (req, res) => {
     try {
