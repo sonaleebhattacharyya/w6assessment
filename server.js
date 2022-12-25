@@ -2,22 +2,41 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const cors = require('cors')
+require('dotenv').config();
 const {ROLLBAR_TOKEN} = process.env
 const {bots, playerRecord} = require('./data')
 const {shuffleArray} = require('./utils')
+
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+  accessToken: ROLLBAR_TOKEN,
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
+
 app.use(express.json())
 app.use(cors())
 
 // I think this is the middleware and/or endpoints that will serve the files from the public folder. 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/index.html')) 
+    res.sendFile(path.join(__dirname, '/public/index.html')) 
+    rollbar.log("string")
+})
+app.get('/styles.css', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/styles.css')) 
+})
+
+// adding a route so that the website calls the correct file (main.js)
+app.get('/main.js', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/main.js')) 
 })
 
 app.get('/api/robots', (req, res) => {
     try {
-        res.status(200).send(botsArr)
+        res.status(200).send(bots)
     } catch (error) {
         console.log('ERROR GETTING BOTS', error)
+        rollbar.log('ERROR GETTING BOTS', error)
         res.sendStatus(400)
     }
 })
@@ -30,6 +49,7 @@ app.get('/api/robots/five', (req, res) => {
         res.status(200).send({choices, compDuo})
     } catch (error) {
         console.log('ERROR GETTING FIVE BOTS', error)
+        rollbar.log('ERROR GETTING FIVE BOTS', error)
         res.sendStatus(400)
     }
 })
@@ -61,6 +81,7 @@ app.post('/api/duel', (req, res) => {
         }
     } catch (error) {
         console.log('ERROR DUELING', error)
+        rollbar.log('ERROR DUELING', error)
         res.sendStatus(400)
     }
 })
@@ -70,6 +91,7 @@ app.get('/api/player', (req, res) => {
         res.status(200).send(playerRecord)
     } catch (error) {
         console.log('ERROR GETTING PLAYER STATS', error)
+        rollbar.log('ERROR GETTING PLAYER STATS', error)
         res.sendStatus(400)
     }
 })

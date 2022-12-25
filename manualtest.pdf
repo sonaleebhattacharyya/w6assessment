@@ -1,0 +1,5 @@
+Test Case: We can test that when you click on "Add to Duo", the bot gets added at the bottom. 
+Bug Report: No bugs. 
+
+Test Case: Clicking on see all bots should produce bot cards. 
+Bug Report: The API (/api/robots) is not working because the bots array was titled "botsarr" but just "bots" elsewhere. 
