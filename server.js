@@ -95,7 +95,8 @@ app.get('/api/player', (req, res) => {
         res.sendStatus(400)
     }
 })
-
+app.use(express.static(`${__dirname}/public`))
 app.listen(4000, () => {
   console.log(`Listening on 4000`)
 })
+
