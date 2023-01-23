@@ -1,0 +1,13 @@
+Overview: We can test that when you click on "Add to Duo", the bot gets added at the bottom. 
+How to reproduce this: 
+We will go to the application and click on the button labelled "Add to Duo". 
+The bot should get added at the bottom of the page. 
+Repeat this process for all of the bots to check that it works. 
+
+Bug Report: There was no error produced when testing this feature. 
+
+
+Test Case: Clicking on "see all bots" should produce bot cards. 
+Bug Report: The API (/api/robots) is not working because the bots array was titled "botsarr" but just "bots" elsewhere. 
+
+Testing Environment: 2021 Imac.
