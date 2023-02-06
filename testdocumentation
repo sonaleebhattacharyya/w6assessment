@@ -1,13 +1,38 @@
-Overview: We can test that when you click on "Add to Duo", the bot gets added at the bottom. 
-How to reproduce this: 
-We will go to the application and click on the button labelled "Add to Duo". 
-The bot should get added at the bottom of the page. 
-Repeat this process for all of the bots to check that it works. 
+Test Plan: Test the functionality of the app. 
 
-Bug Report: There was no error produced when testing this feature. 
+Test Criteria: 
+- When a user clicks on "Add to Duo", the bot gets added at the bottom.
+- When you click on show all bots, it should display ten bots. 
+- When you click on draw, it should show you ten bots. 
+- When you play the game, the losses should reflect in the loss tally and the wins in the win tally. 
+- When you refresh the page, the wins and losses should be reset to zero. 
+- When you are dueling the calculation should tally. 
+
+Entry Criteria: 
+- Test criteria provided. 
+- Computer provided for testing. 
+- Application is running. 
+
+Exit Criteria: 
+- All tests should pass.  
+
+Tests that failed: 
+
+Bug Report 1: When the player wins, the score is added to losses. 
+How to Reproduce: Play until you win. The score will be recorded as a loss. 
+Expected Result: Score is added to wins.
+Actual Result: Score is added to losses. 
+
+Bug Report 2: When we click on draw, it shows only 5 bots, but there are 10 possible bots. 
+This is a bug. 
+How to Reproduce: Click on See all Bots, and you will see 10 distinct bots. However, 
+clicking on Draw only shows five bots. 
+Expected Result: 10 bots are displayed. 
+Actual Result: Only 5 bots are displayed. 
 
 
-Test Case: Clicking on "see all bots" should produce bot cards. 
-Bug Report: The API (/api/robots) is not working because the bots array was titled "botsarr" but just "bots" elsewhere. 
+Bug Report 3: Refreshing the page does not reset the number of wins and losses. 
+How to Reproduce: Play some games, note the wins and losses, and refresh the page. 
+Expected Result: Wins and losses are refreshed. 
+Actual Result: They are not refreshed. 
 
-Testing Environment: 2021 Imac.
